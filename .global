@@ -1,0 +1,73 @@
+#!/bin/bash
+
+#CHECK
+my_update_check_wait_list=""
+
+
+#-----version info-----
+CHECK_version="1.7.4.0"
+SYS_version="1.1.2.0"
+CHAT_version="1.6.0.0"
+#----------------------
+
+
+#file path
+#sh_path="/MY_TEST/Sys/MY_SYSTEM_INFO.sh"
+#info_path="/MY_TEST/Sys/.sys_info"
+
+
+
+#CHAT hint
+offline_info(){
+	echo -e "\n\033[42;37m offline \033[0m\t online \n"
+}
+
+online_info(){
+	echo -e "\n offline \t\033[42;37m online \033[0m\n"
+}
+
+
+#abnormal outputs
+err_info(){
+	echo -e "\033[1m$1:\033[0m \033[1;31merror: \033[0m"
+}
+
+warning_info(){
+	echo -e "\033[1m$1:\033[0m \033[31mWARNING: \033[0m"
+}
+
+todo_hint(){
+	echo -e "\033[1m$1:\033[0m \033[1;31mhint: \033[0m$2"
+}
+
+help_hint(){
+	echo -e "Try \"\033[1m$1 --help\033[0m\" or \"\033[1m$1 -h\033[0m\" for more information."
+}
+
+warning(){
+	local warn_output=$(warning_info $1)
+	echo -e "$warn_output$2"
+	exit 0
+}
+
+err(){
+	local tmp_output=$(err_info $1)
+	echo -e "$tmp_output$2"
+	exit 0
+}
+
+ERR(){
+	local tmp_output_1=$(err_info $1)
+	local tmp_output_2=$(help_hint $1)
+	echo -e "$tmp_output_1$2\n$tmp_output_2"
+	exit 0
+}
+
+unrecognized_option(){
+	local tmp_a=$2
+        if [[ ${tmp_a:0:1} != "-" ]];then
+                err $1 "you forgot '-' before the option."
+        else
+                ERR $1 "unrecognized option '\033[1m${tmp_a##*-}\033[0m'"
+        fi
+}
