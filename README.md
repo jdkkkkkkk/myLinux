@@ -57,6 +57,7 @@ Feel free to open an issue or submit a pull request.
 ## 👤 Author
 
 *Brian Griffin*
+
 Maintained with passion and crafted for productivity.
 
 
